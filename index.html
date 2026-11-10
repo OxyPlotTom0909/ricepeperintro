@@ -14,7 +14,7 @@
 <footer>香米金 · 敬神、環保、做公益</footer>
 <audio id="audio" preload="metadata" loop src="./media/香米金_3.mp3"></audio><div id="status" role="status" aria-live="polite"></div>
 <script>
-const files = ["主委版.001.jpeg","主委版.002.jpeg","主委版.003.jpeg","主委版.004.jpeg","主委版.005.jpeg","主委版.006.jpeg","主委版.007.jpeg","主委版.008.jpeg","主委版.009.jpeg","主委版.010.jpeg"];
+const files = ["v1.001.jpeg","v1.002.jpeg","v1.003.jpeg","v1.004.jpeg","v1.005.jpeg","v1.006.jpeg","v1.007.jpeg","v1.008.jpeg","v1.009.jpeg","v1.010.jpeg"];
 const slides = document.querySelector('#slides');
 files.forEach((file, index) => { const figure = document.createElement('figure'); const img = document.createElement('img'); img.src = `./img/${file}`; img.alt = `香米金主委版簡報第 ${index + 1} 頁`; img.loading = index === 0 ? 'eager' : 'lazy'; const caption = document.createElement('figcaption'); caption.textContent = `${String(index + 1).padStart(2, '0')} / ${String(files.length).padStart(2, '0')}`; figure.append(img, caption); slides.append(figure); });
 const audio = document.querySelector('#audio'); const button = document.querySelector('#music'); const status = document.querySelector('#status');

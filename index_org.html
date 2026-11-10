@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>香米金｜主委版簡報</title>
+<style>
+:root{color-scheme:dark;--gold:#edcc7c;--red:#740b0c}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#681411,#260909 65%);color:#fff2d0;font-family:"PingFang TC","Microsoft JhengHei",sans-serif}header{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem clamp(1rem,4vw,3rem);background:rgba(52,7,7,.95);border-bottom:1px solid #c49a45;box-shadow:0 4px 20px #0008}h1{font-size:clamp(1.05rem,2vw,1.45rem);letter-spacing:.12em;color:var(--gold);margin:0}button{font:inherit;color:#fff2d0;border:1px solid var(--gold);background:linear-gradient(#a3201b,#650808);border-radius:999px;padding:.6rem 1rem;cursor:pointer;white-space:nowrap}button:focus-visible{outline:3px solid white;outline-offset:3px}main{width:min(1200px,94%);margin:2rem auto 3rem;display:grid;gap:2rem}figure{margin:0;border:2px solid #c59a47;background:#290707;border-radius:8px;overflow:hidden;box-shadow:0 12px 35px #0008}img{display:block;width:100%;height:auto}figcaption{padding:.55rem 1rem;text-align:center;color:var(--gold);font-size:.9rem;letter-spacing:.08em}footer{text-align:center;padding:0 1rem 2rem;color:#d7b982;font-size:.85rem}#status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}@media(max-width:480px){header{gap:.5rem}button{font-size:.85rem;padding:.55rem .7rem}main{margin-top:1rem;gap:1rem}}
+</style>
+</head>
+<body>
+<header><h1>香米金</h1><button id="music" type="button" aria-pressed="false">♪ 播放音樂</button></header>
+<main id="slides" aria-label="簡報頁面"></main>
+<footer>香米金 · 敬神、環保、做公益</footer>
+<audio id="audio" preload="metadata" loop src="./media/香米金_3.mp3"></audio><div id="status" role="status" aria-live="polite"></div>
+<script>
+const files = ["01.png","02.png","03.png","04.png","05.png","06.png","07.png","08.png","09.png","10.png","11.png"];
+const slides = document.querySelector('#slides');
+files.forEach((file, index) => { const figure = document.createElement('figure'); const img = document.createElement('img'); img.src = `./img/v2/${file}`; img.alt = `香米金主委版簡報第 ${index + 1} 頁`; img.loading = index === 0 ? 'eager' : 'lazy'; const caption = document.createElement('figcaption'); caption.textContent = `${String(index + 1).padStart(2, '0')} / ${String(files.length).padStart(2, '0')}`; figure.append(img, caption); slides.append(figure); });
+const audio = document.querySelector('#audio'); const button = document.querySelector('#music'); const status = document.querySelector('#status');
+function updateMusic() { const playing = !audio.paused; button.textContent = playing ? '❚❚ 暫停音樂' : '♪ 播放音樂'; button.setAttribute('aria-pressed', String(playing)); }
+button.addEventListener('click', async () => { if (!audio.paused) { audio.pause(); return; } try { await audio.play(); status.textContent = '音樂播放中'; } catch { status.textContent = '無法播放音樂，請確認音訊檔案可用。'; } });
+audio.addEventListener('play', updateMusic); audio.addEventListener('pause', updateMusic); audio.addEventListener('error', () => { status.textContent = '無法載入音樂檔案。'; });
+</script>
+</body></html>
